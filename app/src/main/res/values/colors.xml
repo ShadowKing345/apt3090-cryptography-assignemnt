@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="back_button">#ffffff</color>
+
+    <!--Landing page colors-->
+    <color name="landing_page">#75c0d1</color>
+    <color name="landing_page_text">#ffffff</color>
+    <color name="landing_page_encrypt_button">#8fcc8c</color>
+    <color name="landing_page_decrypt_button">#db6bba</color>
+
+    <!--Encrypt page colors-->
+    <color name="encrypt_page">#9ad58c</color>
+    <color name="encrypt_page_text">#ffffff</color>
+    <color name="encrypt_page_button">#7c94cf</color>
+
+    <!--Decrypt page colors-->
+    <color name="decrypt_page">#e7a8d1</color>
+    <color name="decrypt_page_text">#ffffff</color>
+    <color name="decrypt_page_button">#7c94cf</color>
+
+    <!--Password page colors-->
+    <color name="password_page">#d5d788</color>
+    <color name="password_page_text">#ffffff</color>
+    <color name="password_page_encrypt_text_field">#ffffff</color>
+    <color name="password_page_encrypt_button">#c3634c</color>
+    <color name="password_page_decrypt_text_field">#ffffff</color>
+    <color name="password_page_decrypt_button">#c3634c</color>
+
+    <!--Exit page colors-->
+    <color name="exit_page">#aa8cd8</color>
+    <color name="exit_page_text">#ffffff</color>
+    <color name="exit_page_button">#94c78c</color>
+
+</resources>

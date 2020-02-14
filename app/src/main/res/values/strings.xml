@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">AES</string>
+    <!--Landing page vars-->
+    <string name="landing_page_welcome_label_text">What do you want to do?</string>
+    <string name="choice_encrypt_button_text">Encrypt a file</string>
+    <string name="choice_decrypt_button_text">Decrypt a file</string>
+    <!--Encrypt vars-->
+    <string name="encrypt_header_label_text">Choose which file to encrypt</string>
+    <string name="encrypt_subtext_label_text">An encrypted copy of the file will be generated. No data is sent to our server.</string>
+    <string name="encrypt_button_text">Browse</string>
+    <!--Decrypt vars-->
+    <string name="decrypt_header_label_text">Choose which file to decrypt</string>
+    <string name="decrypt_subtext_label_text">Only files encrypted with this tool will work.</string>
+    <string name="decrypt_button_text">Browse</string>
+    <!--Password page vars-->
+    <string name="password_page_header_label_text">Enter a pass phrase</string>
+    <string name="password_page_text_field_helper_text">Enter key here.</string>
+    <string name="password_page_encrypt_subtext_label_text">This phrase will be used as an encryption key. Write it down or remember it, you wont be able to restore the file without it.</string>
+    <string name="password_page_encrypt_button_text">Encrypt!</string>
+    <string name="password_page_decrypt_subtext_label_text">This phrase will be used as an encryption key. Write it down or remember it, you wont be able to restore the file without it.</string>
+    <string name="password_page_decrypt_button_text">Decrypt!</string>
+    <!--Exit page vars-->
+    <string name="exit_page_label_text">Your file is ready!</string>
+</resources>
