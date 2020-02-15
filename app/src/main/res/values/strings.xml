@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">AES</string>
+    <string name="back_button_text"></string>
     <!--Landing page vars-->
     <string name="landing_page_welcome_label_text">What do you want to do?</string>
     <string name="choice_encrypt_button_text">Encrypt a file</string>
