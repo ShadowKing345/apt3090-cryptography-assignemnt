@@ -1,23 +1,25 @@
 package com.example.aes;
 
-import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import static com.example.aes.Progress.*;
 
 public class EncryptDecryptActivity extends AppCompatActivity {
-    public static final String IntentExtraName = "com.aturcanu.AES.ENCRYPTDECRYPTDATA";
+    public static final String INTENT_EXTRA_STRING = "com.aturcanu.AES.ENCRYPT_DECRYPT_DATA";
 
-    public MainActivity.Options choice;
+    public Progress progress;
 
     private ConstraintLayout page;
     private TextView headerTextView;
@@ -30,56 +32,62 @@ public class EncryptDecryptActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.encrypt_decrypt_page);
 
-        page = findViewById(R.id.encrypt_decrypt_page);
-        headerTextView = findViewById(R.id.encrypt_decrypt_page_header);
-        subTextView = findViewById(R.id.encrypt_decrypt_page_subtext);
-        input = findViewById(R.id.encrypt_decrypt_page_input);
-        confirmButton = findViewById(R.id.encrypt_decrypt_page_confirm_button);
-
         Intent intent  = getIntent();
-        String stringedData = intent.getStringExtra(IntentExtraName);
+        progress = (Progress)intent.getSerializableExtra(INTENT_EXTRA_STRING);
 
-        JSONObject data = new JSONObject();
-        try {
-            if (stringedData != null)
-                data = new JSONObject(stringedData);
-            else
-                data = new JSONObject("{ 'choice':0 }");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        choice = MainActivity.Options.NEITHER;
-        try {
-            choice = MainActivity.Options.valueOf(data.getString("choice"));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        page = (ConstraintLayout) findViewById(R.id.encrypt_decrypt_page);
+        headerTextView = (TextView) findViewById(R.id.encrypt_decrypt_page_header);
+        subTextView = (TextView) findViewById(R.id.encrypt_decrypt_page_subtext);
+        input = (EditText) findViewById(R.id.encrypt_decrypt_page_input);
+        confirmButton = (Button) findViewById(R.id.encrypt_decrypt_page_confirm_button);
+
+        input.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                switch (actionId) {
+                    case EditorInfo
+                            .IME_ACTION_DONE:
+                        onConfirmButtonClick(v);
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        AlterPagesLooks(choice);
+        AlterPagesLook(progress.getChoice());
     }
 
-    private void AlterPagesLooks(MainActivity.Options choice) {
+    private void AlterPagesLook(Options choice) {
         switch (choice) {
             case ENCRYPT:
                 page.setBackgroundResource(R.color.encrypt_page);
                 headerTextView.setText(R.string.encrypt_header_label_text);
+                headerTextView.setTextColor(getResources().getColor(R.color.encrypt_page_text));
                 subTextView.setText(R.string.encrypt_subtext_label_text);
+                subTextView.setTextColor(getResources().getColor(R.color.encrypt_page_text));
                 input.setBackgroundResource(R.color.encrypt_page_button);
+                input.setTextColor(getResources().getColor(R.color.encrypt_page_text));
                 confirmButton.setText(R.string.encrypt_button_text);
                 confirmButton.setBackgroundResource(R.color.encrypt_page_button);
+                confirmButton.setTextColor(getResources().getColor(R.color.encrypt_page_text));
 
                 break;
             case DECRYPT:
                 page.setBackgroundResource(R.color.decrypt_page);
                 headerTextView.setText(R.string.decrypt_header_label_text);
+                headerTextView.setTextColor(getResources().getColor(R.color.decrypt_page_text));
                 subTextView.setText(R.string.decrypt_subtext_label_text);
+                subTextView.setTextColor(getResources().getColor(R.color.decrypt_page_text));
                 input.setBackgroundResource(R.color.decrypt_page_button);
+                input.setTextColor(getResources().getColor(R.color.decrypt_page_text));
                 confirmButton.setText(R.string.decrypt_button_text);
                 confirmButton.setBackgroundResource(R.color.decrypt_page_button);
+                confirmButton.setTextColor(getResources().getColor(R.color.decrypt_page_text));
                 break;
             case NEITHER:
             default:
@@ -91,6 +99,38 @@ public class EncryptDecryptActivity extends AppCompatActivity {
     private void GoBack(){
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    public void onConfirmButtonClick(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.alert_dialog_box_title);
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+
+        String inputText = input.getText().toString();
+
+        if(inputText == null){
+            dialog.setMessage(getResources().getString(R.string.what));
+            dialog.show();
+            return;
+        }
+
+        if(inputText.length() <= 0){
+            dialog.setMessage(getResources().getString(R.string.alert_dialog_message_empty_text));
+            dialog.show();
+            return;
+        }
+
+        progress.setInput(inputText);
+
+        Intent intent = new Intent(this, PasswordActivity.class);
+        intent.putExtra(PasswordActivity.INTENT_EXTRA_STRING, progress);
         startActivity(intent);
     }
 

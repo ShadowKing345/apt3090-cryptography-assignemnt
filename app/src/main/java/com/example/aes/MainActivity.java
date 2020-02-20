@@ -1,26 +1,14 @@
 package com.example.aes;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.JsonWriter;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import static com.example.aes.Progress.*;
 
 public class MainActivity extends AppCompatActivity {
-
-    public enum Options {
-        ENCRYPT,
-        DECRYPT,
-        NEITHER
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +32,9 @@ public class MainActivity extends AppCompatActivity {
     private void changePageToEncrypt(Options option) {
         Intent intent = new Intent(this, EncryptDecryptActivity.class);
 
-        JSONObject data = new JSONObject();
-        try {
-            data.put("choice", option);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        Progress progress = new Progress(option);
 
-        System.out.println(data.toString());
-        intent.putExtra(EncryptDecryptActivity.IntentExtraName, data.toString());
+        intent.putExtra(EncryptDecryptActivity.INTENT_EXTRA_STRING, progress);
         startActivity(intent);
     }
 

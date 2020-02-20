@@ -1,31 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/exit_page">
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/exit_page_back_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="onBackButtonClick"
         android:text="Button"
-        tools:layout_editor_absoluteX="162dp"
-        tools:layout_editor_absoluteY="342dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="184dp"
-        tools:layout_editor_absoluteY="260dp" />
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="4dp"
-        tools:layout_editor_absoluteY="5dp" />
+        <TextView
+            android:id="@+id/exit_page_header_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/exit_page_label_text"
+            android:textColor="@color/exit_page_text"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/exit_page_result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:maxWidth="400dp"
+            android:maxHeight="60dp"
+            android:text="TextView"
+            android:textColor="@color/exit_page_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/exit_page_header_text" />
+
+        <Button
+            android:id="@+id/exit_page_copy_button"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="32dp"
+            android:background="@color/exit_page_button"
+            android:onClick="onCopyButtonClick"
+            android:text="@string/exit_page_copy_button_text"
+            android:textColor="@color/exit_page_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/exit_page_result_text" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
