@@ -6,14 +6,19 @@
     android:layout_height="match_parent"
     android:background="@color/exit_page">
 
-    <Button
-        android:id="@+id/exit_page_back_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
         android:onClick="onBackButtonClick"
-        android:text="Button"
+        android:rotation="-90"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_icon" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

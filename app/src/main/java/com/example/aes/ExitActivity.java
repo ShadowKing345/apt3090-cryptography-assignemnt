@@ -5,18 +5,21 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ExitActivity extends AppCompatActivity {
 
     public static final String INTENT_EXTRA_STRING = "com.aturcanu.AES.END_DATA";
-    Progress progress;
+    private Progress progress;
+    private String result;
 
     private TextView resultTextView;
 
@@ -31,16 +34,28 @@ public class ExitActivity extends AppCompatActivity {
         resultTextView = (TextView) findViewById(R.id.exit_page_result_text);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onStart() {
         super.onStart();
 
-        resultTextView.setText(progress.getInput());
+        switch (progress.getChoice()) {
+            case ENCRYPT:
+                result = AES.encrypt(progress.getInput(), progress.getKey());
+                break;
+            case DECRYPT:
+                result = AES.decrypt(progress.getInput(), progress.getKey());
+                break;
+            case NEITHER:
+                default:
+                    goBack();
+        }
+                resultTextView.setText(result);
     }
 
     public void onCopyButtonClick(View view) {
         ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clipData = ClipData.newPlainText("cypher text", "Hello World");
+        ClipData clipData = ClipData.newPlainText("cypher text", result);
         assert clipboardManager != null;
         clipboardManager.setPrimaryClip(clipData);
 
@@ -58,6 +73,10 @@ public class ExitActivity extends AppCompatActivity {
     }
 
     public void onBackButtonClick(View view) {
+        goBack();
+    }
+
+    public void goBack() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
