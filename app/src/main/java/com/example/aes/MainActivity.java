@@ -37,10 +37,4 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(EncryptDecryptActivity.INTENT_EXTRA_STRING, progress);
         startActivity(intent);
     }
-
-    public void onBackButtonClick(View view){
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-    }
 }

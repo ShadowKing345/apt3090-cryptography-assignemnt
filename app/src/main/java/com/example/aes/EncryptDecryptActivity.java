@@ -91,14 +91,13 @@ public class EncryptDecryptActivity extends AppCompatActivity {
                 break;
             case NEITHER:
             default:
-                GoBack();
+                goBack();
 
         }
     }
 
-    private void GoBack(){
+    private void goBack(){
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
@@ -135,8 +134,6 @@ public class EncryptDecryptActivity extends AppCompatActivity {
     }
 
     public void onBackButtonClick(View view){
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        goBack();
     }
 }

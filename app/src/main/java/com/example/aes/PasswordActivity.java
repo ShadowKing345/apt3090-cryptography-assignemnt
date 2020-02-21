@@ -60,10 +60,10 @@ public class PasswordActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        AlterPagesLook(progress.getChoice());
+        alterPagesLook(progress.getChoice());
     }
 
-    private void AlterPagesLook(Options choice) {
+    private void alterPagesLook(Options choice) {
         page.setBackgroundResource(R.color.password_page);
         headerTextView.setText(R.string.password_page_header_label_text);
         headerTextView.setTextColor(getResources().getColor(R.color.password_page_text));
@@ -88,7 +88,7 @@ public class PasswordActivity extends AppCompatActivity {
 
             case NEITHER:
             default:
-                GoBack();
+                goBack();
 
         }
 
@@ -132,16 +132,14 @@ public class PasswordActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void GoBack(){
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    private void goBack(){
+        Intent intent = new Intent(getApplicationContext(), EncryptDecryptActivity.class);
+        intent.putExtra(EncryptDecryptActivity.INTENT_EXTRA_STRING, progress);
         startActivity(intent);
     }
 
 
     public void onBackButtonClick(View view) {
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        goBack();
     }
 }

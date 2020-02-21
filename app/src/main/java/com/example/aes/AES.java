@@ -19,7 +19,7 @@ public class AES {
     private static byte[] bytes;
 
     public static void setKey(String key) {
-        MessageDigest sha = null;
+        MessageDigest sha;
         try {
             bytes = key.getBytes("UTF-8");
             sha = MessageDigest.getInstance("SHA-1");
