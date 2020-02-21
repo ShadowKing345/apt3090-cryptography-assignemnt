@@ -38,7 +38,7 @@
     <string name="password_page_decrypt_button_text">Decrypt!</string>
 
     <!--Exit page vars-->
-    <string name="exit_page_label_text">Your cypher text is ready!</string>
+    <string name="exit_page_label_text">Your text is ready!</string>
     <string name="exit_page_copy_button_text">Copy to clipboard</string>
 
 </resources>
